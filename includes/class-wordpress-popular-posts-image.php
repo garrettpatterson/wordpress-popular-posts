@@ -149,7 +149,7 @@ class WPP_Image {
             && !$url 
         ) {
             $file_path = $this->get_image_file_paths( $post_object->id, $source );
-
+			//$file_path = get_the_post_thumbnail_url($post_object->id,'thumbnail');
             // No images found, return default thumbnail
             if ( !$file_path ) {
                 return $this->render_image( $this->default_thumbnail, $size, 'wpp-thumbnail wpp_def_noPath wpp_' . $source, $post_object );

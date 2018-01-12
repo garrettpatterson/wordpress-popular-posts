@@ -200,6 +200,7 @@ class WPP_Output {
                 'stats' => $post_meta,
                 'img' => ( !empty( $post_thumbnail ) ) ? '<a href="' . $permalink . '" title="' . $post_title_attr . '" target="' . $this->admin_options['tools']['link']['target'] . '">' . $post_thumbnail . '</a>' : '',
                 'img_no_link' => $post_thumbnail,
+                'img_url'=> get_the_post_thumbnail_url($post_object->id,'thumbnail')? get_the_post_thumbnail_url($post_object->id,'thumbnail') : $this->admin_options['default_thumbnail'],
                 'url' => $permalink,
                 'text_title' => $post_title_attr,
                 'taxonomy' => $post_taxonomies,
@@ -800,7 +801,7 @@ class WPP_Output {
             return false;
 
         $params = array();
-        $pattern = '/\{(pid|excerpt|summary|meta|stats|title|image|thumb|thumb_img|thumb_url|rating|score|url|text_title|author|taxonomy|category|views|comments|date)\}/i';
+        $pattern = '/\{(pid|excerpt|summary|meta|stats|title|image|thumb|thumb_img|thumb_url|img_url|rating|score|url|text_title|author|taxonomy|category|views|comments|date)\}/i';
         preg_match_all( $pattern, $string, $matches );
 
         array_map( 'strtolower', $matches[0] );
@@ -823,6 +824,10 @@ class WPP_Output {
 
         if ( in_array( "{image}", $matches[0]) || in_array("{thumb}", $matches[0] ) ) {
             $string = str_replace( array("{image}", "{thumb}"), $data['img'], $string );
+        }
+
+        if ( in_array( "{img_url}", $matches[0]) || in_array("{img_url}", $matches[0] ) ) {
+            $string = str_replace( array("{img_url}", "{img_url}"), $data['img_url'], $string );
         }
 
         if ( in_array( "{thumb_img}", $matches[0] ) ) {
