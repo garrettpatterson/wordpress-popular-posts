@@ -190,7 +190,7 @@ class WPP_Output {
         // Post meta
         $post_meta = join( ' | ', $this->get_metadata( $post_object ) );
 
-        // Build custom HTML output
+        // Build custom HTML outputf
         if ( $this->options['markup']['custom_html'] ) {
 
             $data = array(
@@ -200,7 +200,7 @@ class WPP_Output {
                 'stats' => $post_meta,
                 'img' => ( !empty( $post_thumbnail ) ) ? '<a href="' . $permalink . '" title="' . $post_title_attr . '" target="' . $this->admin_options['tools']['link']['target'] . '">' . $post_thumbnail . '</a>' : '',
                 'img_no_link' => $post_thumbnail,
-                'img_url'=> get_the_post_thumbnail_url($post_object->id,'thumbnail')? get_the_post_thumbnail_url($post_object->id,'thumbnail') : $this->admin_options['default_thumbnail'],
+                'img_url'=> get_the_post_thumbnail_url($post_object->id,'thumbnail')? get_the_post_thumbnail_url($post_object->id,'thumbnail') : $this->admin_options['tools']['thumbnail']['default'],
                 'url' => $permalink,
                 'text_title' => $post_title_attr,
                 'taxonomy' => $post_taxonomies,
